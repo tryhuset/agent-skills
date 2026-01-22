@@ -25,6 +25,28 @@ Analyzes uncommitted changes and organizes them into logical, well-structured co
 
 [View skill →](./skills/commit-organizer/)
 
+---
+
+### swift-composable-architecture
+
+Expert guidance for building iOS/macOS apps with The Composable Architecture (TCA) from Point-Free.
+
+**Use when:**
+- Building new features with TCA
+- Refactoring existing code to TCA patterns
+- Debugging state or effect issues
+- Writing tests with TestStore
+
+**What it covers:**
+- Feature anatomy (State, Action, Reducer, Store)
+- Effects and cancellation patterns
+- Dependency injection with DependencyKey
+- Navigation (tree-based and stack-based)
+- Testing with TestStore and TestClock
+- Modern TCA macros (@Reducer, @ObservableState, @CasePathable)
+
+[View skill →](./skills/swift-composable-architecture/)
+
 ## License
 
 MIT
