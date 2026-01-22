@@ -1,4 +1,4 @@
-# Tryhuset Agent Skills
+# TRY Agent Skills
 
 Practical skills for AI coding agents, built from real-world workflows.
 
@@ -53,4 +53,4 @@ MIT
 
 ---
 
-Built by **[Tryhuset](https://try.no)** — Creators, designers, advisors, and technologists. Norway's top-ranked agency for 22 consecutive years. Anthropic partner for Claude AI implementation.
+Built by **[TRY](https://try.no)** — Creators, designers, advisors, and technologists. Norway's top-ranked agency for 22 consecutive years. Anthropic partner for Claude AI implementation.
