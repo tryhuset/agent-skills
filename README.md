@@ -47,6 +47,29 @@ Expert guidance for building iOS/macOS apps with The Composable Architecture (TC
 
 [View skill →](./skills/swift-composable-architecture/)
 
+---
+
+### swiftui-animations
+
+Expert guidance for building smooth, performant, and accessible animations in SwiftUI.
+
+**Use when:**
+- Building animations for iOS/macOS apps
+- Choosing between animation APIs (withAnimation, PhaseAnimator, KeyframeAnimator)
+- Implementing gesture-driven interactions
+- Debugging animation issues
+
+**What it covers:**
+- Core principles (state-driven animation, transactions, Animatable protocol)
+- Implicit animations (withAnimation, .animation modifier, timing curves)
+- Explicit animations (AnimatableModifier, custom shapes)
+- Transitions (built-in, combined, asymmetric, custom)
+- Gesture-driven animations with spring physics
+- Modern iOS 17+ APIs (PhaseAnimator, KeyframeAnimator)
+- Accessibility (reduced motion support)
+
+[View skill →](./skills/swiftui-animations/)
+
 ## License
 
 MIT
