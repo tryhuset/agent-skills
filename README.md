@@ -25,6 +25,7 @@ Analyzes uncommitted changes and organizes them into logical, well-structured co
 
 [View skill →](./skills/commit-organizer/)
 
+Install just this skill:
 ```bash
 npx skills add tryhuset/agent-skills --skill commit-organizer
 ```
@@ -51,6 +52,7 @@ Expert guidance for building iOS/macOS apps with The Composable Architecture (TC
 
 [View skill →](./skills/swift-composable-architecture/)
 
+Install just this skill:
 ```bash
 npx skills add tryhuset/agent-skills --skill swift-composable-architecture
 ```
@@ -78,6 +80,7 @@ Expert guidance for building smooth, performant, and accessible animations in Sw
 
 [View skill →](./skills/swiftui-animations/)
 
+Install just this skill:
 ```bash
 npx skills add tryhuset/agent-skills --skill swiftui-animations
 ```
