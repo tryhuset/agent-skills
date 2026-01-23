@@ -25,6 +25,10 @@ Analyzes uncommitted changes and organizes them into logical, well-structured co
 
 [View skill →](./skills/commit-organizer/)
 
+```bash
+npx skills add tryhuset/agent-skills --skill commit-organizer
+```
+
 ---
 
 ### swift-composable-architecture
@@ -46,6 +50,10 @@ Expert guidance for building iOS/macOS apps with The Composable Architecture (TC
 - Modern TCA macros (@Reducer, @ObservableState, @CasePathable)
 
 [View skill →](./skills/swift-composable-architecture/)
+
+```bash
+npx skills add tryhuset/agent-skills --skill swift-composable-architecture
+```
 
 ---
 
@@ -69,6 +77,10 @@ Expert guidance for building smooth, performant, and accessible animations in Sw
 - Accessibility (reduced motion support)
 
 [View skill →](./skills/swiftui-animations/)
+
+```bash
+npx skills add tryhuset/agent-skills --skill swiftui-animations
+```
 
 ## License
 
