@@ -3,7 +3,7 @@ name: swift-composable-architecture
 description: Use when building, refactoring, debugging, or testing iOS/macOS features using The Composable Architecture (TCA). Covers feature structure, effects, dependencies, navigation patterns, and testing with TestStore.
 license: MIT
 metadata:
-  author: tryhuset
+  author: hakonbogen
   version: "1.0.0"
 ---
 

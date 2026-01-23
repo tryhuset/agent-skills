@@ -4,7 +4,7 @@ description: Use when you need to organize uncommitted changes into logical, wel
 tools: Bash, Glob, Grep, Read, TodoWrite
 license: MIT
 metadata:
-  author: tryhuset
+  author: hakonbogen
   version: "1.0.1"
 ---
 
