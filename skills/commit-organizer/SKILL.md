@@ -91,6 +91,7 @@ If additional context is needed:
 ### DO NOT:
 - Bundle unrelated changes together
 - Include any AI/Claude/agent signatures or references
+- Add "Co-Authored-By" lines mentioning Claude, AI, or any agent
 - Stage files that shouldn't be committed (logs with secrets, personal data, credentials, .env files with real values)
 - Use grandiose or promotional language
 - Alter existing repository history (no rebasing, amending pushed commits, etc.)
