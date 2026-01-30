@@ -85,6 +85,31 @@ Install just this skill:
 npx skills add tryhuset/agent-skills --skill swiftui-animations
 ```
 
+---
+
+### ios26-liquid-glass
+
+API reference for implementing iOS 26 Liquid Glass effects in SwiftUI.
+
+**Use when:**
+- Adding glass effects to SwiftUI views
+- Building toolbars or controls with Liquid Glass
+- Implementing morphing transitions between glass elements
+
+**What it covers:**
+- `glassEffect` modifier with Glass types (`.regular`, `.clear`, `.identity`)
+- Tinting and interactive modifiers
+- Shape options (capsule, circle, rounded rectangle)
+- `GlassEffectContainer` for grouping elements
+- `glassEffectID` for morphing transitions
+
+[View skill →](./skills/ios26-liquid-glass/)
+
+Install just this skill:
+```bash
+npx skills add tryhuset/agent-skills --skill ios26-liquid-glass
+```
+
 ## License
 
 MIT
