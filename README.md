@@ -6,6 +6,11 @@ Practical skills for AI coding agents, built from real-world workflows.
 npx skills add tryhuset/agent-skills
 ```
 
+Skills can also be installed globally using 
+```bash
+npx skills add tryhuset/agent-skills --global
+```
+
 ## Skills
 
 ### commit-organizer
@@ -109,6 +114,28 @@ Install just this skill:
 ```bash
 npx skills add tryhuset/agent-skills --skill ios26-liquid-glass
 ```
+
+---
+
+### backstage
+
+Creates or uodate a backstage.yaml file for registering the repo into the TRY Backstage platform.
+
+**Use when:**
+- You've created a new repo and need to register it into Backstage
+- You've changed the architecture and/or the dependencies of the project and need to update the Backstage.yaml to make it in line with the project
+
+**What it does:**
+- Creates or updates the backstage.yaml according to TRY Backstage guidelines
+
+[View skill →](./skills/backstage/)
+
+Install just this skill:
+```bash
+npx skills add tryhuset/agent-skills --skill backstage
+```
+
+---
 
 ## License
 
