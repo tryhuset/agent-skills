@@ -47,10 +47,12 @@ After writing, read the file back to confirm it is valid multi-document YAML wit
 Always use this order in the file, separated by `---`:
 
 1. **System** (exactly one per file)
-2. **Component** entries
-3. **Resource** entries
-4. **API** entries
+2. **Component** entries (the codebases where logic lives: server, GUI, mobile, studio, booking, etc.)
+3. **Resource** entries (instances/environments: databases, infra, hardware, CMS, Docker instances, Vercel deployments, `.apk`/`.ipa`, etc.)
+4. **API** entries (integration interfaces between components and/or external systems)
 5. **Group** entries (only if defined in the same file)
+
+> API entities should normally be created and managed in `try-backstage-catalog`, then referenced from local entities. Only create local API entities when its explicitly established that its managed by the client and is not using the internally managed services/resources/APIs. E.g: The hosting is managed by the client's own Vercel instance, and not by Tryhuset.'
 
 ---
 
@@ -65,7 +67,7 @@ Always use this order in the file, separated by `---`:
 - **Public APIs** set `metadata.namespace: public` and are referenced as `public/<api-name>` in `consumesApis`.
 - **External partner/org resources** use their org namespace, e.g. `resource:back/knox`, `resource:norges-bank/sentry`.
 
-> If an internally managed service, resource, or API does not already exist, note that it should be created in the `tryhuset` namespace in the `try-backstage-catalog` repository.
+> If an internally managed service, resource, or API does not already exist, create it in the `tryhuset` namespace in the `try-backstage-catalog` repository.
 
 ---
 
@@ -98,8 +100,11 @@ annotations:
 
 Top-level product grouping. One per file.
 
-- Set `spec.owner`, `spec.lifecycle`, and `spec.domain` when relevant.
+- Define ownership with `spec.owner` and define a dedicated namespace for the system.
+- Set `spec.lifecycle`.
+- Use `spec.type` for framework/shared platform systems when applicable.
 - Include key links (docs, repo, production URLs) in `metadata.links`.
+- Do not use `spec.domain` in the TRY Backstage catalog.
 
 ### Component
 
@@ -107,7 +112,7 @@ Deployable or buildable units.
 
 - `spec.type`: `service`, `website`, `mobile`, `library`, `tool`, etc.
 - `dependsOn`: explicit kind prefixes — `component:name`, `resource:tryhuset/sentry`.
-- `providesApis`: APIs this component exposes.
+- `providesApis`: APIs this component exposes (normally APIs that are defined centrally in `try-backstage-catalog`).
 - `consumesApis`: APIs this component uses. Use `public/<api-name>` for public APIs.
 - Subcomponents (e.g. GUI, mobile, studio) are components that list the server in `dependsOn`.
 
@@ -123,16 +128,17 @@ Infrastructure, databases, hardware, or external services.
 
 Integration surfaces.
 
-- Internal APIs live in the same system and are referenced by name.
+- Internal APIs are referenced by name in the same system.
 - Public APIs set `metadata.namespace: public` and are referenced as `public/<api-name>`.
 - Websocket game APIs use `spec.type: websocket` and `parent: foundation-socket-api` when applicable.
 - Provide `target` or `definition` for clarity.
+- Prefer defining API entities in `try-backstage-catalog` and referencing them here to avoid duplication of shared services/resources/APIs.
 
 ---
 
 ## Template
 
-Use this as the starting point. Remove sections that don't apply, add sections as needed.
+Use this as the starting point. Remove sections that don't apply, add sections as needed. Keep entity order intact.
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
@@ -140,6 +146,7 @@ kind: System
 metadata:
   name: <system-name>
   title: <System Title>
+  namespace: <system-namespace>
   description: <System description>
   tags:
     - <domain-tag>
@@ -149,6 +156,7 @@ metadata:
     github.com/project-slug: tryhuset/<repo-name>
     jira.com/project-key: <JIRA_KEY>
 spec:
+  type: <optional-system-type>
   owner: <owner-group>
   lifecycle: production
   domain: <domain>
@@ -158,6 +166,7 @@ kind: Component
 metadata:
   name: <component-name>
   title: <Component Title>
+  namespace: <system-namespace>
   description: <Component description>
   tags:
     - <tech-tags>
@@ -182,6 +191,7 @@ kind: Resource
 metadata:
   name: <resource-name>
   title: <Resource Title>
+  namespace: <system-namespace>
   description: <Resource description>
   tags:
     - <tech-tags>
@@ -190,11 +200,14 @@ spec:
   lifecycle: production
   owner: <owner-group>
   system: <system-name>
+  dependsOn:
+    - resource:tryhuset/<shared-resource>
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: <api-name>
+  namespace: <system-namespace>
   description: <API description>
 spec:
   type: websocket
@@ -216,7 +229,25 @@ spec:
   owner: public
   definition: |
     <API definition summary>
+---
+apiVersion: backstage.io/v1alpha1
+kind: resource
+metadata:
+  name: <deployment-name>
+  title: <Deployment Title>
+  namespace: <system-namespace>
+  description: <Deployment description>
+spec:
+  type: deployment
+  lifecycle: production
+  owner: <owner-group>
+  system: <system-name>
+  dependsOn:
+    - resource:tryhuset/<shared-resource-for-hosting>
+    - component:<component-name>
 ```
+
+> Note: API entities are typically owned in `try-backstage-catalog`. If they already exist there, do not duplicate definitions in this repository; reference them via `providesApis` and `consumesApis`.
 
 ---
 
@@ -225,13 +256,15 @@ spec:
 Before finishing, verify:
 
 - [ ] System entity comes first
-- [ ] Entity order: System > Components > Resources > APIs > Groups
+- [ ] Entity order: System > Components > Resources > APIs
 - [ ] All `metadata.name` values use kebab-case
 - [ ] Shared internal services reference `tryhuset` namespace
 - [ ] Public APIs use `metadata.namespace: public`
+- [ ] API entities are created in `try-backstage-catalog` unless explicitly requested locally because they are managed by the client, not shared and thus not shared internally.
 - [ ] All components and resources have `dependsOn` where applicable
 - [ ] API relationships use `providesApis` and `consumesApis`
 - [ ] Every entity has `name`, `title`, `description`, `tags`, `owner`, and `lifecycle`
 - [ ] Annotations populated from `.mcpcontext` or user input
 - [ ] File uses `---` separators between entities
 - [ ] No duplicate entity names
+- [ ] Excpect there to minimum be one system, one component that is the core service provided (website, application, etc.), one resource that is the hosting platform deployment (Vercel, AWS, Azure, etc.).
