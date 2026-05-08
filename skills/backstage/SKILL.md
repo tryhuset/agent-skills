@@ -19,12 +19,11 @@ Generate a multi-document `backstage.yaml` for a product/system following intern
 Before generating anything, understand the system:
 
 1. **Check for an existing `backstage.yaml`** in the repo root using Glob. If one exists, read it — you may be updating, not creating from scratch.
-2. **Read `.mcpcontext`** if it exists to discover project keys (Jira, Sentry, GitHub slug, Busy project ID, etc.).
-3. **Scan the codebase** to infer components, tech stack, and structure:
+2. **Scan the codebase** to infer components, tech stack, and structure:
    - Look for `package.json`, `Dockerfile`, `Podfile`, `*.csproj`, `build.gradle`, `go.mod`, or similar to identify component types and technologies.
    - Look for database config files, migration directories, or ORM setup to identify resources.
    - Check for API route definitions, OpenAPI specs, or socket handlers to identify APIs.
-4. **Ask the user** (via AskQuestion when available) for anything you cannot infer:
+3. **Ask the user** (via AskQuestion when available) for anything you cannot infer:
    - System name, title, and description
    - Owner (group or user)
    - Lifecycle (`production`, `development`, `experimental`)
