@@ -137,6 +137,31 @@ npx skills add tryhuset/agent-skills --skill backstage
 
 ---
 
+### xquik-x-data
+
+Source-checked guidance for Xquik REST API and remote MCP workflows for X data.
+
+**Use when:**
+- Setting up Xquik REST API or MCP access
+- Searching X posts or looking up users
+- Exporting followers, media, or engagement datasets
+- Planning monitors, webhooks, giveaway draws, or account actions
+
+**What it covers:**
+- Current Xquik docs, OpenAPI, and MCP source checks
+- Target validation and result bounds
+- Approval gates for private, write, persistent, or bulk work
+- Untrusted-content handling for X-authored text
+
+[View skill →](./skills/xquik-x-data/)
+
+Install just this skill:
+```bash
+npx skills add tryhuset/agent-skills --skill xquik-x-data
+```
+
+---
+
 ## License
 
 MIT
