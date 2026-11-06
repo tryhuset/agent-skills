@@ -154,7 +154,7 @@ Include each of these whenever you can identify the service from the repo. A mis
 | **Production URL** | Always | From the README, `vercel.json`, framework config or `try.no/sla-client-domain`. Ask if it isn't clear. |
 | **Hosting project** | When `dependsOn` has `resource:tryhuset/vercel` or `resource:tryhuset/cloudflare` | Vercel: `https://vercel.com/<team>/<project>`. Cloudflare: `https://dash.cloudflare.com/<account_id>` with `account_id` from `wrangler.jsonc`. |
 | **CMS admin** | When the product uses a CMS (Storyblok, Sanity, Contentful…) | Storyblok: `https://app.storyblok.com/#/me/spaces/<space_id>/dashboard`, with the space ID from `wrangler.jsonc` or `.env.example`. |
-| **Commerce admin** | When the product uses Centra, Shopify, etc. | Centra: `https://<store>.centra.com/<admin-path>`. Derive `<store>` from e.g. `CENTRA_INTEGRATION_URL` in `wrangler.jsonc`. The admin path (`ams2019`, `ams2020`…) varies per client — **always ask**, never borrow it from another project. |
+| **Commerce admin** | When the product uses Centra, Shopify, etc. | Centra: `https://<store>.centra.com/<admin-path>`. Derive `<store>` from e.g. `CENTRA_INTEGRATION_URL` in `wrangler.jsonc`. The admin path varies per client — **always ask**, never borrow it from another project. |
 
 ### Required Component links
 
