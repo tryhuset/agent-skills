@@ -15,7 +15,7 @@ Write for a developer who has never opened Backstage: narrative descriptions ove
 
 ## Ground rules
 
-- **Every specific comes from this repo or from the user.** TRY products share libraries and stack choices — same Storyblok + Centra + Cloudflare-revalidate-worker shape, same `@frend-digital/cache/next`. That similarity is exactly when it's tempting to fill in env var names, HTTP methods, binding names, Centra admin paths, Storyblok space IDs, Cloudflare account IDs, queue and worker names, or BetterStack IDs from memory of another repo. **Don't.** Two products can share the entire stack and still differ in every one of those values. Each one must trace back to a file you read in this session, a read-only lookup you ran, or an explicit answer from the user.
+- **Every specific comes from this repo or from the user.** TRY products often share libraries and stack choices: the same CMS, commerce platform, hosting and shared packages. That similarity is exactly when it's tempting to fill in env var names, HTTP methods, binding names, admin paths, CMS space IDs, cloud account IDs, queue and worker names, or BetterStack IDs from memory of another repo. **Don't.** Two products can share the entire stack and still differ in every one of those values. Each one must trace back to a file you read in this session, a read-only lookup you ran, or an explicit answer from the user.
 - **Never read secret files.** Only `.env.example` / `.env.sample` are allowed, and secret files stay out of searches too.
 - **Never copy a secret** into the file or the chat. If you spot one, say which file it's in.
 - **Read-only shell:** `git` and text tools only. No vendor CLIs, no process env. From the Git remote, keep only `org/repo`.

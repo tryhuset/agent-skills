@@ -13,7 +13,7 @@ Below it, add one comment line for anything intentionally not modeled (skipped d
 Always use this order, separated by `---`:
 
 1. **System** — exactly one per file
-2. **API** entries that are _local_ to this product (e.g. an internal `/api/revalidate` provided by our web app and called by our worker)
+2. **API** entries that are _local_ to this product (e.g. an internal endpoint provided by our web app and called by our worker)
 3. **Component** entries — the codebases we build and deploy: web, worker, mobile, studio
 4. **Resource** entries — queues, durable objects, KV namespaces, buckets, anything we provision
 
@@ -44,7 +44,7 @@ Third-party services, hosting platforms, observability backends and other shared
 
 - Resource: `resource:tryhuset/<service-slug>` — e.g. `resource:tryhuset/vercel`, `resource:tryhuset/cloudflare`, `resource:tryhuset/betterstack`
 - API: `tryhuset/<service-slug>-api` — e.g. `tryhuset/storyblok-api`, `tryhuset/centra-api`
-- Public API: `public/<api-name>` — e.g. `public/udir-api`
+- Public API: `public/<api-name>` — e.g. `public/open-data-api`
 - Partner-owned: `resource:<org>/<name>` or `<org>/<name>-api` — e.g. `<partner-org>/<service>-api`
 
 `<service-slug>` is the kebab-case brand name: `google-maps`, `azure-openai`, `aws-s3`, `cloudflare`.
@@ -72,8 +72,8 @@ For a given service, pick the one that matches what you do with it, and don't re
 
 Use for any outbound HTTP call:
 
-- Third-party APIs: `tryhuset/storyblok-api`, `tryhuset/centra-api`, `public/udir-api`
-- **Internal APIs in the same product**: if the worker calls the web app's `/api/revalidate`, model the endpoint as a local `API` entity and put it in the worker's `consumesApis`.
+- Third-party APIs: `tryhuset/storyblok-api`, `tryhuset/centra-api`, `public/open-data-api`
+- **Internal APIs in the same product**: if the worker calls an endpoint on the web app, model the endpoint as a local `API` entity and put it in the worker's `consumesApis`.
 
 ### `providesApis` — who exposes the API
 
@@ -135,7 +135,7 @@ Infrastructure we provision: queues, durable objects, KV, buckets, databases.
 
 ### API
 
-Use sparingly in the local file — the common case is an **internal API between sibling Components** (e.g. a Next.js `/api/revalidate` endpoint called by a worker).
+Use sparingly in the local file — the common case is an **internal API between sibling Components** (e.g. a web app endpoint called by a worker).
 
 - `spec.type`: `rest`, `openapi`, `graphql`, `websocket`, `grpc`, `asyncapi`
 - `spec.lifecycle`, `spec.owner`, `spec.system`
