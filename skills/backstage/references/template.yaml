@@ -1,0 +1,125 @@
+# Starting point for a new backstage.yaml. Remove what doesn't apply, add what's
+# missing, and keep the header comment and the entity order
+# (System → local APIs → Components → Resources). Replace every <...>, or drop
+# the line if the value is unknown — the finished file has no placeholders.
+# Delete this note; the file starts at the header below.
+
+# Backstage catalog manifest for the <Product> product.
+#
+# Quick primer:
+#   System    = the product as a whole.
+#   Component = something we build and deploy (web app, worker, mobile app).
+#   Resource  = infrastructure we depend on (queues, durable objects, log drains, hosting).
+#   API       = an HTTP/websocket surface — third-party or one of our own.
+#
+# House conventions:
+#   - consumesApis  → who CALLS an API (HTTP direction). Use for third-party AND
+#                     our own component-to-component calls.
+#   - providesApis  → who EXPOSES an API. Put on the producing component, with a
+#                     matching API entity in this file (or in try-backstage-catalog).
+#   - dependsOn     → platforms we run on, or runtime/data bindings (queue, durable
+#                     object, log drain). NOT for HTTP — that's consumesApis.
+#   - owner         → always a GitHub team slug, written as group:default/<slug>.
+#
+# Reference catalog: https://github.com/tryhuset/try-backstage-catalog
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: <system-name>
+  title: <System Title>
+  description: >-
+    <One or two sentences on what this product is and what it runs on.>
+  links:
+    - url: https://www.<production-domain>
+      title: Production
+      icon: web
+    - url: https://vercel.com/tryhuset/<project>
+      title: Vercel project
+      icon: dashboard
+  tags:
+    - <domain-tag>
+    - <framework-tag>
+    - <tech-tag>
+  annotations:
+    github.com/project-slug: tryhuset/<repo-name>
+    busy.no/project-id: "<UPPERCASE-KEY>"
+    hubspot.com/company-id: "<hubspot-company-id>"
+    try.no/sla-tier: standard # default; CS team owns non-standard values
+    try.no/sla-client-domain: <production-domain>
+    try.no/log-drain: betterstack # only on the System if every Component shares it
+spec:
+  owner: group:default/<gh-team-slug>
+  lifecycle: production
+---
+# Local API — only when a sibling Component in this product calls it.
+# Third-party and shared APIs live in try-backstage-catalog.
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: <product>-<api-name>
+  title: <API Title>
+  description: >-
+    <What this endpoint does and who calls it.>
+spec:
+  type: rest
+  lifecycle: production
+  owner: group:default/<gh-team-slug>
+  system: <system-name>
+  definition: |
+    <METHOD> /<path>
+    Auth: <auth model>
+    Source: <file path>
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: <product>-web
+  title: <Product> Web
+  description: >-
+    <What this component does — narrative, not boilerplate.>
+  tags:
+    - <tech-tags>
+  links:
+    - url: https://www.<production-domain>
+      title: Production
+      icon: web
+    - url: https://vercel.com/tryhuset/<project>
+      title: Vercel project
+      icon: dashboard
+  annotations:
+    backstage.io/source-location: url:https://github.com/tryhuset/<repo>/tree/main/apps/<subdir>
+    # Operational baseline: required on production websites, recommended elsewhere.
+    # Or set try.no/unmonitored: <reason> when TRY can't monitor it.
+    betterstack.com/monitor-ids: '<monitor-id>'
+    betterstack.com/source-ids: '<source-id>,<source-id>'
+spec:
+  type: website
+  lifecycle: production
+  owner: group:default/<gh-team-slug>
+  system: <system-name>
+  providesApis:
+    - <product>-<api-name>
+  consumesApis:
+    - tryhuset/<external-api>
+    - public/<public-api>
+  dependsOn:
+    - resource:tryhuset/<hosting-platform>
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: <product>-<resource-name>
+  title: <Resource Title>
+  description: >-
+    <What this resource is and what it's used for. Include the real infra name
+    if metadata.name differs from it.>
+  tags:
+    - <tech-tags>
+spec:
+  type: infrastructure
+  lifecycle: production
+  owner: group:default/<gh-team-slug>
+  system: <system-name>
+  dependsOn:
+    - resource:tryhuset/<shared-platform>

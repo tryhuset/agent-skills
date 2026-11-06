@@ -119,14 +119,18 @@ npx skills add tryhuset/agent-skills --skill ios26-liquid-glass
 
 ### backstage
 
-Creates or uodate a backstage.yaml file for registering the repo into the TRY Backstage platform.
+Creates, updates or checks a backstage.yaml file for registering the repo in the TRY Backstage platform.
 
 **Use when:**
-- You've created a new repo and need to register it into Backstage
-- You've changed the architecture and/or the dependencies of the project and need to update the Backstage.yaml to make it in line with the project
+- You've created a new repo and need to register it in Backstage
+- You've changed the architecture and/or the dependencies of the project and need to bring backstage.yaml in line with it
+- You need to record the SLA tier and BetterStack monitoring (uptime monitor and log source IDs) for a project
 
 **What it does:**
-- Creates or updates the backstage.yaml according to TRY Backstage guidelines
+- Inventories the repo first, then asks a short batch of questions with recommended answers
+- Looks up BetterStack monitors and sources (when the BetterStack MCP is available) and checks that logs are arriving
+- Creates the file, or edits an existing one in place, according to TRY Backstage guidelines
+- Verifies the result against the conventions and the operational baseline, then hands off for review
 
 [View skill →](./skills/backstage/)
 
